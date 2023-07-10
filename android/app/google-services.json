@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "850490052990",
+    "project_id": "simple-lunch-dda25",
+    "storage_bucket": "simple-lunch-dda25.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:850490052990:android:8a0570e28e06132155232f",
+        "android_client_info": {
+          "package_name": "com.example.simple_lunch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "850490052990-kafsbof2785otjenql7sfjf53sjjm4ut.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfapxQXAXapGWFGHp_-UpD_wbn2Mq3cBE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "850490052990-kafsbof2785otjenql7sfjf53sjjm4ut.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
