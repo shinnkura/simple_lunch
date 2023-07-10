@@ -29,6 +29,13 @@
             {
               "client_id": "850490052990-kafsbof2785otjenql7sfjf53sjjm4ut.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "850490052990-6fsuk56kkb115epdfd7mm0007s9avkrs.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.simpleLunch.RunnerTests"
+              }
             }
           ]
         }

@@ -132,46 +132,6 @@ class _OrderListPageState extends State<OrderListPage> {
                                           color: Colors.green,
                                         ),
                                       ),
-                                      // if (order['small'])
-                                      //   Text(
-                                      //     '  少なめ',
-                                      //     style: TextStyle(
-                                      //       fontSize: 16,
-                                      //       color: Colors.orange,
-                                      //     ),
-                                      //   ),
-                                      // if (order['isSugar'])
-                                      //   Text(
-                                      //     '  砂糖',
-                                      //     style: TextStyle(
-                                      //       fontSize: 16,
-                                      //       color: Colors.red,
-                                      //     ),
-                                      //   ),
-                                      // if (order['caramel'])
-                                      //   Text(
-                                      //     '  キャラメル',
-                                      //     style: TextStyle(
-                                      //       fontSize: 16,
-                                      //       color: Colors.purple,
-                                      //     ),
-                                      //   ),
-                                      // if (order['isCondecensedMilk'])
-                                      //   Text(
-                                      //     '  練乳',
-                                      //     style: TextStyle(
-                                      //       fontSize: 16,
-                                      //       color: Colors.blue,
-                                      //     ),
-                                      //   ),
-                                      // if (order['isPickupOn4thFloor'])
-                                      //   Text(
-                                      //     '  4階で受け取る',
-                                      //     style: TextStyle(
-                                      //       fontSize: 16,
-                                      //       color: Colors.green,
-                                      //     ),
-                                      //   ),
                                     ],
                                   )
                                 ],
