@@ -7,7 +7,7 @@ const kBackgroundColor = Colors.white;
 const kErrorColor = Colors.red;
 const kTextColor = Colors.black;
 const kTextLightColor = Color.fromARGB(255, 172, 170, 170);
-const kTextErrorColor = Colors.white;
+const kTextErrorColor = Colors.red;
 
 // Padding
 const kDefaultPadding = 20.0;

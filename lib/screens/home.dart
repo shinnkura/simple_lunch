@@ -32,13 +32,22 @@ class _HomePageState extends State<HomePage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        OrderPage(key: Key('order'), title: 'Order')),
+                  builder: (context) => OrderPage(
+                    key: Key('order'),
+                    title: '注文',
+                  ),
+                ),
               );
             },
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(
                 kPrimaryColor,
+              ),
+              padding: MaterialStateProperty.all<EdgeInsets>(
+                const EdgeInsets.symmetric(
+                  horizontal: 20.0,
+                  vertical: 15.0,
+                ),
               ),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(

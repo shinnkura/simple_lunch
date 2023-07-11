@@ -120,7 +120,6 @@ class _EditOrderPageState extends State<EditOrderPage> {
               },
             ),
             const SizedBox(height: 20),
-            // },  // <- 修正: ここで閉じカッコが不要なため削除
             Container(
               width: double.infinity,
               child: ElevatedButton(

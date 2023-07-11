@@ -44,7 +44,27 @@ class _OrderPageState extends State<OrderPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(
+          widget.title,
+          style: TextStyle(
+            color: kTextColor,
+          ),
+        ),
+        backgroundColor: kPrimaryColor,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: kTextColor,
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const HomePage(),
+              ),
+            );
+          },
+        ),
       ),
       body: _buildBody(),
     );
@@ -110,13 +130,47 @@ class _OrderPageState extends State<OrderPage> {
                   );
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const HomePage(),
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation1, animation2) =>
+                          const HomePage(),
+                      transitionDuration:
+                          Duration(milliseconds: 500), // 遷移時間を0.5秒に変更
+                      transitionsBuilder:
+                          (context, animation, animationTime, child) {
+                        animation = CurvedAnimation(
+                          parent: animation,
+                          curve: Curves.fastOutSlowIn, // アニメーションのカーブを変更
+                        );
+                        return SlideTransition(
+                          position: Tween(
+                                  begin: Offset(-1.0, 0.0),
+                                  end: Offset(0.0, 0.0))
+                              .animate(animation),
+                          child: child,
+                        );
+                      },
                     ),
                   );
                 }
               },
-              child: Text('注文'),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                  kPrimaryColor,
+                ),
+                padding: MaterialStateProperty.all<EdgeInsets>(
+                  const EdgeInsets.symmetric(
+                    horizontal: 20.0,
+                    vertical: 15.0,
+                  ),
+                ),
+              ),
+              child: const Text(
+                '注文',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: kTextColor,
+                ),
+              ),
             ),
           ],
         ),
