@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:simple_lunch/constants.dart';
 import 'package:simple_lunch/screens/edit_menu.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../services/preferences_service.dart';
 import 'edit_order.dart';
 import 'order.dart';
 import '../services/order_loader.dart';
@@ -17,11 +18,30 @@ class _HomePageState extends State<HomePage> {
   String menuTitle = '今日の献立';
   String menuDescription = '説明';
 
+  // void updateMenu(String title, String description) {
+  //   setState(() {
+  //     menuTitle = title;
+  //     menuDescription = description;
+  //   });
+  // }
+
+  @override
+  void initState() {
+    super.initState();
+    loadMenu().then((menu) {
+      setState(() {
+        menuTitle = menu['title']!;
+        menuDescription = menu['description']!;
+      });
+    });
+  }
+
   void updateMenu(String title, String description) {
     setState(() {
       menuTitle = title;
       menuDescription = description;
     });
+    saveMenu(title, description);
   }
 
   @override

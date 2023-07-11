@@ -23,3 +23,16 @@ Future<void> saveOrder(
   // データを保存します
   prefs.setString('order', orderString);
 }
+
+Future<void> saveMenu(String title, String description) async {
+  final prefs = await SharedPreferences.getInstance();
+  prefs.setString('menuTitle', title);
+  prefs.setString('menuDescription', description);
+}
+
+Future<Map<String, String>> loadMenu() async {
+  final prefs = await SharedPreferences.getInstance();
+  String title = prefs.getString('menuTitle') ?? '今日の献立';
+  String description = prefs.getString('menuDescription') ?? '説明';
+  return {'title': title, 'description': description};
+}

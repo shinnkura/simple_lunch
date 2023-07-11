@@ -66,7 +66,7 @@ class EditMenuScreen extends StatelessWidget {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
                     updateMenu(_menuTitle, _menuDescription);
-                    Navigator.pop(context);  // 追加
+                    Navigator.pop(context);
                   }
                 },
                 child: const Text('保存'),
