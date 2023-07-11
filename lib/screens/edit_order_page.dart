@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:simple_lunch/screens/order_list.dart';
 
 import '../constants.dart';
-import 'coffee_type_dropdown.dart';
 
 class EditOrderPage extends StatefulWidget {
   final String name;
@@ -96,13 +95,23 @@ class _EditOrderPageState extends State<EditOrderPage> {
             if (!isOrderCancelled) ...[
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: CoffeeTypeDropdown(
-                  dropdownValue: dropdownValue,
-                  onChanged: (newValue) {
+                child: DropdownButton<String>(
+                  value: dropdownValue,
+                  onChanged: (String? newValue) {
                     setState(() {
                       dropdownValue = newValue!;
                     });
                   },
+                  items: const [
+                    'コーヒー',
+                    'カフェオレ',
+                    'ちょいふわカフェオレ',
+                  ].map<DropdownMenuItem<String>>((value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
                 ),
               ),
               const SizedBox(height: 20),
@@ -176,7 +185,9 @@ class _EditOrderPageState extends State<EditOrderPage> {
                   await cancelOrder();
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => OrderListPage(),),
+                    MaterialPageRoute(
+                      builder: (context) => OrderListPage(),
+                    ),
                   );
                 },
                 style: ButtonStyle(
