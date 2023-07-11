@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:simple_lunch/screens/order_lists/order_list.dart';
-import '../../constants.dart';
-import 'components/custom_app_bar.dart';
-import 'components/custom_dropdown_button.dart';
-import 'components/custom_elevated_button.dart';
+import 'package:simple_lunch/screens/order_list.dart';
+import '../constants.dart';
+import 'custom_dropdown_button.dart';
 
 class OrderPage extends StatefulWidget {
   const OrderPage({required Key key, required this.title}) : super(key: key);
@@ -45,7 +43,11 @@ class _OrderPageState extends State<OrderPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: widget.title),
+      // appBar: CustomAppBar(title: widget.title),
+      appBar: AppBar(
+        title: Text(widget.title),
+        // automaticallyImplyLeading: false,
+      ),
       body: _buildBody(),
     );
   }
@@ -118,7 +120,7 @@ class _OrderPageState extends State<OrderPage> {
                 });
               },
             ),
-            CustomElevatedButton(
+            ElevatedButton(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   _saveOrder(
@@ -135,7 +137,7 @@ class _OrderPageState extends State<OrderPage> {
                   );
                 }
               },
-              text: '注文',
+              child: Text('注文'),
             ),
           ],
         ),
