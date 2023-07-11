@@ -27,10 +27,6 @@ class _EditOrderPageState extends State<EditOrderPage> {
   late String selectedTime;
   bool isOrderCancelled = false;
   bool small = false;
-  bool isSugar = false;
-  bool caramel = false;
-  bool isCondecensedMilk = false;
-  bool isPickupOn4thFloor = false;
 
   Future<void> updateOrder() async {
     CollectionReference orders =
@@ -46,10 +42,6 @@ class _EditOrderPageState extends State<EditOrderPage> {
           'coffeeType': dropdownValue,
           'time': selectedTime,
           'small': small,
-          'isSugar': isSugar,
-          'caramel': caramel,
-          'isCondecensedMilk': isCondecensedMilk,
-          'isPickupOn4thFloor': isPickupOn4thFloor,
         });
         break;
       }
@@ -142,42 +134,6 @@ class _EditOrderPageState extends State<EditOrderPage> {
                   });
                 },
               ),
-              CheckboxListTile(
-                title: const Text("砂糖"),
-                value: isSugar,
-                onChanged: (bool? value) {
-                  setState(() {
-                    isSugar = value!;
-                  });
-                },
-              ),
-              CheckboxListTile(
-                title: const Text("キャラメルシロップ"),
-                value: caramel,
-                onChanged: (bool? value) {
-                  setState(() {
-                    caramel = value!;
-                  });
-                },
-              ),
-              CheckboxListTile(
-                title: const Text("練乳"),
-                value: isCondecensedMilk,
-                onChanged: (bool? value) {
-                  setState(() {
-                    isCondecensedMilk = value!;
-                  });
-                },
-              ),
-              CheckboxListTile(
-                title: const Text("４階で受け取る"),
-                value: isPickupOn4thFloor,
-                onChanged: (bool? value) {
-                  setState(() {
-                    isPickupOn4thFloor = value!;
-                  });
-                },
-              ),
               const SizedBox(height: 20),
             ],
             Container(
@@ -189,7 +145,8 @@ class _EditOrderPageState extends State<EditOrderPage> {
                   }
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const OrderListPage()),
+                    MaterialPageRoute(
+                        builder: (context) => const OrderListPage()),
                   );
                 },
                 style: ButtonStyle(

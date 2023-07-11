@@ -22,20 +22,12 @@ class _OrderPageState extends State<OrderPage> {
   String dropdownValue = 'コーヒー';
   String timeDropdownValue = '15時30分';
   bool small = false;
-  bool _isSugar = false;
-  bool caramel = false;
-  bool _isCondecensedMilk = false;
-  bool _isPickupOn4thFloor = false;
 
   Future<void> _saveOrder(
     String time,
     String coffeeType,
     String name,
     bool small,
-    bool isSugar,
-    bool caramel,
-    bool isCondecensedMilk,
-    bool isPickupOn4thFloor,
   ) async {
     CollectionReference orders =
         FirebaseFirestore.instance.collection('orders');
@@ -45,10 +37,6 @@ class _OrderPageState extends State<OrderPage> {
           'coffeeType': coffeeType,
           'name': name,
           'small': small,
-          'isSugar': isSugar,
-          'caramel': caramel,
-          'isCondecensedMilk': isCondecensedMilk,
-          'isPickupOn4thFloor': isPickupOn4thFloor,
         })
         .then((value) => print("Order Added"))
         .catchError((error) => print("Failed to add order: $error"));
@@ -139,42 +127,6 @@ class _OrderPageState extends State<OrderPage> {
                 });
               },
             ),
-            CheckboxListTile(
-              title: const Text("砂糖あり"),
-              value: _isSugar,
-              onChanged: (bool? value) {
-                setState(() {
-                  _isSugar = value!;
-                });
-              },
-            ),
-            CheckboxListTile(
-              title: const Text("キャラメルシロップ"),
-              value: caramel,
-              onChanged: (bool? value) {
-                setState(() {
-                  caramel = value!;
-                });
-              },
-            ),
-            CheckboxListTile(
-              title: const Text("練乳あり"),
-              value: _isCondecensedMilk,
-              onChanged: (bool? value) {
-                setState(() {
-                  _isCondecensedMilk = value!;
-                });
-              },
-            ),
-            CheckboxListTile(
-              title: const Text("４階で受け取る"),
-              value: _isPickupOn4thFloor,
-              onChanged: (bool? value) {
-                setState(() {
-                  _isPickupOn4thFloor = value!;
-                });
-              },
-            ),
             CustomElevatedButton(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
@@ -183,10 +135,6 @@ class _OrderPageState extends State<OrderPage> {
                     dropdownValue,
                     _nameController.text,
                     small,
-                    _isSugar,
-                    caramel,
-                    _isCondecensedMilk,
-                    _isPickupOn4thFloor,
                   );
                   Navigator.push(
                     context,

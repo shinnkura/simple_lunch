@@ -100,38 +100,6 @@ class _OrderListPageState extends State<OrderListPage> {
                                           color: Colors.orange,
                                         ),
                                       ),
-                                      Text(
-                                        order['isSugar'] ? '  砂糖' : '',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color: Colors.red,
-                                        ),
-                                      ),
-                                      Text(
-                                        order['caramel'] ? '  キャラメル' : '',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color: Colors.purple,
-                                        ),
-                                      ),
-                                      Text(
-                                        order['isCondecensedMilk']
-                                            ? '  練乳'
-                                            : '',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color: Colors.blue,
-                                        ),
-                                      ),
-                                      Text(
-                                        order['isPickupOn4thFloor']
-                                            ? '  4階受取'
-                                            : '',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color: Colors.green,
-                                        ),
-                                      ),
                                     ],
                                   )
                                 ],
