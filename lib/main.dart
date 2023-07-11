@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
-import 'package:simple_lunch/screens/home/home_screen.dart';
 import 'package:simple_lunch/screens/order_lists/order_list.dart';
 import 'package:simple_lunch/screens/order_screen/order_screen.dart';
 import 'firebase_options.dart';
@@ -26,7 +25,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Coffee Order',
       theme: _buildThemeData(context),
-      home: const HomeScreen(),
+      home: const OrderListPage(),
       routes: _buildRoutes(),
     );
   }
