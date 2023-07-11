@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:simple_lunch/screens/order_list.dart';
-import 'package:simple_lunch/screens/order_screen.dart';
+import 'package:simple_lunch/screens/order.dart';
 import 'firebase_options.dart';
 
 import 'constants.dart';

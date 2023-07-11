@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'edit_order_page.dart';
-import 'order_screen.dart';
-import 'order_loader.dart';
+import 'edit_order.dart';
+import 'order.dart';
+import '../services/order_loader.dart';
 
 class OrderListPage extends StatefulWidget {
   const OrderListPage({Key? key}) : super(key: key);
