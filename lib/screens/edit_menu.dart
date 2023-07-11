@@ -50,12 +50,12 @@ class EditMenuScreen extends StatelessWidget {
                 decoration: const InputDecoration(
                   labelText: '説明',
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return '説明を入力してください';
-                  }
-                  return null;
-                },
+                // validator: (value) {
+                //   if (value == null || value.isEmpty) {
+                //     return '説明を入力してください';
+                //   }
+                //   return null;
+                // },
                 onSaved: (value) {
                   _menuDescription = value!;
                 },
