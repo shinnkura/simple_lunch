@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simple_lunch/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'edit_order.dart';
 import 'order.dart';
@@ -16,107 +17,152 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('しんぷるランチ'),
+        title: Text(
+          'しんぷるランチ',
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
         automaticallyImplyLeading: false,
+        backgroundColor: kPrimaryColor,
       ),
-      body: FutureBuilder<Map<String, Map<String, List<Map<String, dynamic>>>>>(
-        future: loadOrder(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('エラーが発生しました: ${snapshot.error}'));
-          } else {
-            Map<String, Map<String, List<Map<String, dynamic>>>> orders =
-                snapshot.data!;
-            return ListView.builder(
-              itemCount: orders.length,
-              itemBuilder: (context, index) {
-                String time = orders.keys.elementAt(index);
-                int totalOrdersAtThisTime = orders[time]!
-                    .values
-                    .fold(0, (prev, curr) => prev + curr.length);
-                return ExpansionTile(
-                  title: Text('$time     $totalOrdersAtThisTime名',
-                      style: TextStyle(color: Colors.brown[800], fontSize: 20)),
-                  children: orders[time]!.entries.map((entry) {
-                    String coffeeType = entry.key;
-                    List<Map<String, dynamic>> ordersList = entry.value;
-                    return Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      elevation: 10,
-                      margin: const EdgeInsets.all(8.0),
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '$coffeeType     ${ordersList.length}名',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Colors.brown[800]),
-                            ),
-                            Divider(color: Colors.brown[800]),
-                            ...ordersList.map((order) {
-                              return Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  IconButton(
-                                    icon: Icon(
-                                      Icons.edit,
-                                      color: Colors.brown[700],
-                                    ),
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => EditOrderPage(
-                                            name: order['name'],
-                                            initialCoffeeType: coffeeType,
-                                            initialTime: time,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        '${order['name']}',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color: Colors.brown[700],
-                                        ),
-                                      ),
-                                      Text(
-                                        order['small'] ? '  少なめ' : '',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color: Colors.orange,
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              );
-                            }).toList(),
-                          ],
+      body: Column(
+        children: [
+          const SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        OrderPage(key: Key('order'), title: 'Order')),
+              );
+            },
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(
+                kPrimaryColor,
+              ),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+              ),
+            ),
+            child: Text(
+              '注文する',
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.black,
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+          Expanded(
+            child: FutureBuilder<
+                Map<String, Map<String, List<Map<String, dynamic>>>>>(
+              future: loadOrder(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('エラーが発生しました: ${snapshot.error}'));
+                } else {
+                  Map<String, Map<String, List<Map<String, dynamic>>>> orders =
+                      snapshot.data!;
+                  return ListView.builder(
+                    itemCount: orders.length,
+                    itemBuilder: (context, index) {
+                      String time = orders.keys.elementAt(index);
+                      int totalOrdersAtThisTime = orders[time]!
+                          .values
+                          .fold(0, (prev, curr) => prev + curr.length);
+                      return ExpansionTile(
+                        title: Text(
+                          '$time     $totalOrdersAtThisTime名',
+                          style:
+                              TextStyle(color: Colors.brown[800], fontSize: 20),
                         ),
-                      ),
-                    );
-                  }).toList(),
-                );
+                        children: orders[time]!.entries.map((entry) {
+                          String coffeeType = entry.key;
+                          List<Map<String, dynamic>> ordersList = entry.value;
+                          return Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                            elevation: 10,
+                            margin: const EdgeInsets.all(8.0),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '$coffeeType     ${ordersList.length}名',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                        color: Colors.brown[800]),
+                                  ),
+                                  Divider(color: Colors.brown[800]),
+                                  ...ordersList.map((order) {
+                                    return Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        IconButton(
+                                          icon: Icon(
+                                            Icons.edit,
+                                            color: Colors.brown[700],
+                                          ),
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    EditOrderPage(
+                                                  name: order['name'],
+                                                  initialCoffeeType: coffeeType,
+                                                  initialTime: time,
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              '${order['name']}',
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                color: Colors.brown[700],
+                                              ),
+                                            ),
+                                            Text(
+                                              order['small'] ? '  少なめ' : '',
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                color: Colors.orange,
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    );
+                                  }).toList(),
+                                ],
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      );
+                    },
+                  );
+                }
               },
-            );
-          }
-        },
+            ),
+          ),
+        ],
       ),
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -133,22 +179,10 @@ class _HomePageState extends State<HomePage> {
                   throw 'Could not launch $url';
                 }
               },
-              backgroundColor: Colors.brown[500],
+              backgroundColor: Colors.orange[500],
               heroTag: null,
               child: Icon(Icons.mail),
             ),
-          ),
-          SizedBox(height: 10),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        OrderPage(key: Key('order'), title: 'Order')),
-              );
-            },
-            child: Text('注文する'),
           ),
         ],
       ),
