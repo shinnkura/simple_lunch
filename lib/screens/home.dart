@@ -147,6 +147,9 @@ class _HomePageState extends State<HomePage> {
                                                 color: Colors.brown[700],
                                               ),
                                             ),
+                                            Text(
+                                              'コメント: ${order['comment']}',
+                                            ),
                                           ],
                                         )
                                       ],
@@ -167,7 +170,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Padding(
             padding: const EdgeInsets.all(30),

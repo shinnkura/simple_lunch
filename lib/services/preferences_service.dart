@@ -6,6 +6,7 @@ Future<void> saveOrder(
   String time,
   String coffeeType,
   String name,
+  String comment, // 新しいパラメータ
   // bool small,
 ) async {
   final prefs = await SharedPreferences.getInstance();
@@ -14,6 +15,7 @@ Future<void> saveOrder(
     'time': time,
     'coffeeType': coffeeType,
     'name': name,
+    'comment': comment, // コメントを保存
     // 'small': small,
   };
   // データをJSON形式の文字列に変換します

@@ -22,6 +22,7 @@ class EditOrderPage extends StatefulWidget {
 
 class _EditOrderPageState extends State<EditOrderPage> {
   late TextEditingController _nameController;
+  late TextEditingController _commentController; // 新しいコントローラー
   late String dropdownValue;
   late String selectedTime;
   bool isOrderCancelled = false;
@@ -41,6 +42,7 @@ class _EditOrderPageState extends State<EditOrderPage> {
           'coffeeType': dropdownValue,
           'time': selectedTime,
           'small': small,
+          'comment': _commentController.text, // コメントを更新
         });
         break;
       }
@@ -66,6 +68,7 @@ class _EditOrderPageState extends State<EditOrderPage> {
   void initState() {
     super.initState();
     _nameController = TextEditingController(text: widget.name);
+    _commentController = TextEditingController(); // コントローラーを初期化
     dropdownValue = widget.initialCoffeeType;
     selectedTime = widget.initialTime;
   }
@@ -93,6 +96,15 @@ class _EditOrderPageState extends State<EditOrderPage> {
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: TextField(
+                controller: _commentController, // コメント入力フィールド
+                decoration: InputDecoration(
+                  labelText: 'コメント',
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: DropdownButton<String>(
                 value: selectedTime,
                 onChanged: (String? newValue) {
@@ -108,16 +120,6 @@ class _EditOrderPageState extends State<EditOrderPage> {
                   );
                 }).toList(),
               ),
-            ),
-            const SizedBox(height: 20),
-            CheckboxListTile(
-              title: const Text("少なめ（250ml程度）"),
-              value: small,
-              onChanged: (bool? value) {
-                setState(() {
-                  small = value!;
-                });
-              },
             ),
             const SizedBox(height: 20),
             Container(

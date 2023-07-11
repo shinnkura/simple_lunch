@@ -16,6 +16,7 @@ class OrderPage extends StatefulWidget {
 class _OrderPageState extends State<OrderPage> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
+  final _commentController = TextEditingController();
 
   String dropdownValue = 'コーヒー';
   String timeDropdownValue = '15時30分';
@@ -26,6 +27,7 @@ class _OrderPageState extends State<OrderPage> {
     String coffeeType,
     String name,
     bool small,
+    String comment,
   ) async {
     CollectionReference orders =
         FirebaseFirestore.instance.collection('orders');
@@ -35,6 +37,7 @@ class _OrderPageState extends State<OrderPage> {
           'coffeeType': coffeeType,
           'name': name,
           'small': small,
+          'comment': comment,
         })
         .then((value) => print("Order Added"))
         .catchError((error) => print("Failed to add order: $error"));
@@ -103,6 +106,20 @@ class _OrderPageState extends State<OrderPage> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: TextFormField(
+                controller: _commentController, // コメント入力フィールド
+                style: Theme.of(context).textTheme.titleMedium,
+                decoration: const InputDecoration(
+                  labelText: 'コメント',
+                  labelStyle: TextStyle(color: kTextColor),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: kTextColor),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: DropdownButton<String>(
                 value: timeDropdownValue,
                 onChanged: (String? newValue) {
@@ -127,6 +144,7 @@ class _OrderPageState extends State<OrderPage> {
                     dropdownValue,
                     _nameController.text,
                     small,
+                    _commentController.text,
                   );
                   Navigator.push(
                     context,
