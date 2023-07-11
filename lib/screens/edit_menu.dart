@@ -32,8 +32,11 @@ class EditMenuScreen extends StatelessWidget {
           child: Column(
             children: <Widget>[
               TextFormField(
-                decoration: const InputDecoration(
-                  labelText: '献立',
+                decoration: InputDecoration(
+                  labelText: '本日の献立',
+                  hintText: '本日のメニュー',
+                  border: OutlineInputBorder(),
+                  contentPadding: EdgeInsets.all(10),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -47,8 +50,12 @@ class EditMenuScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16.0),
               TextFormField(
+                maxLines: 3,
                 decoration: const InputDecoration(
                   labelText: '説明',
+                  hintText: '説明を書いてください',
+                  border: OutlineInputBorder(),
+                  contentPadding: EdgeInsets.all(10),
                 ),
                 // validator: (value) {
                 //   if (value == null || value.isEmpty) {
