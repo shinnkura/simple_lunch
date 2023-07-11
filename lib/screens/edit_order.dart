@@ -22,7 +22,7 @@ class EditOrderPage extends StatefulWidget {
 
 class _EditOrderPageState extends State<EditOrderPage> {
   late TextEditingController _nameController;
-  late TextEditingController _commentController; // 新しいコントローラー
+  late TextEditingController _commentController;
   late String dropdownValue;
   late String selectedTime;
   bool isOrderCancelled = false;
@@ -112,8 +112,15 @@ class _EditOrderPageState extends State<EditOrderPage> {
                     selectedTime = newValue!;
                   });
                 },
-                items: <String>['15時30分', '17時30分']
-                    .map<DropdownMenuItem<String>>((String value) {
+                items: <String>[
+                  "12時30分",
+                  "13時00分",
+                  "13時30分",
+                  "14時00分",
+                  "14時30分",
+                  "15時00分",
+                  "15時30分"
+                ].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(value),

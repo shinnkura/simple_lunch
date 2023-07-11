@@ -19,7 +19,7 @@ class _OrderPageState extends State<OrderPage> {
   final _commentController = TextEditingController();
 
   String dropdownValue = 'コーヒー';
-  String timeDropdownValue = '15時30分';
+  String timeDropdownValue = '12時30分';
   bool small = false;
 
   Future<void> _saveOrder(
@@ -127,8 +127,15 @@ class _OrderPageState extends State<OrderPage> {
                     timeDropdownValue = newValue!;
                   });
                 },
-                items: <String>['15時30分', '17時30分']
-                    .map<DropdownMenuItem<String>>((String value) {
+                items: <String>[
+                  "12時30分",
+                  "13時00分",
+                  "13時30分",
+                  "14時00分",
+                  "14時30分",
+                  "15時00分",
+                  "15時30分"
+                ].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(value),
