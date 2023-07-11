@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Order List'),
+        title: Text('しんぷるランチ'),
         automaticallyImplyLeading: false,
       ),
       body: FutureBuilder<Map<String, Map<String, List<Map<String, dynamic>>>>>(

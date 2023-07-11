@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Coffee Order',
+      title: 'しんぷるランチ',
       theme: _buildThemeData(context),
       home: const HomePage(),
       routes: _buildRoutes(),

@@ -154,8 +154,7 @@ class _EditOrderPageState extends State<EditOrderPage> {
                   }
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => const OrderListPage()),
+                    MaterialPageRoute(builder: (context) => const HomePage()),
                   );
                 },
                 style: ButtonStyle(
@@ -186,7 +185,7 @@ class _EditOrderPageState extends State<EditOrderPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => OrderListPage(),
+                      builder: (context) => HomePage(),
                     ),
                   );
                 },
