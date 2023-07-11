@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:simple_lunch/screens/order_lists/order_list.dart';
 
 import '../../constants.dart';
-import '../thanks_pages/thanks_page.dart';
 import 'components/coffee_type_dropdown.dart';
 
 class EditOrderPage extends StatefulWidget {
@@ -189,7 +189,7 @@ class _EditOrderPageState extends State<EditOrderPage> {
                   }
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const ThanksPage()),
+                    MaterialPageRoute(builder: (context) => const OrderListPage()),
                   );
                 },
                 style: ButtonStyle(
@@ -219,7 +219,7 @@ class _EditOrderPageState extends State<EditOrderPage> {
                   await cancelOrder();
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const ThanksPage()),
+                    MaterialPageRoute(builder: (context) => OrderListPage()),
                   );
                 },
                 style: ButtonStyle(
