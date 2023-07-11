@@ -176,7 +176,7 @@ class _EditOrderPageState extends State<EditOrderPage> {
                   await cancelOrder();
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => OrderListPage()),
+                    MaterialPageRoute(builder: (context) => OrderListPage(),),
                   );
                 },
                 style: ButtonStyle(

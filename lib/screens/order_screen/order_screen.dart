@@ -106,15 +106,6 @@ class _OrderPageState extends State<OrderPage> {
                   'コーヒー',
                   'カフェオレ',
                   'ちょいふわカフェオレ',
-                  'ふわふわカフェオレ',
-                  'アイスコーヒー（水出し）',
-                  'アイスコーヒー(急冷式)',
-                  'アイスカフェオレ',
-                  'アイスカフェオレ（ミルク多め）',
-                  'ソイラテ',
-                  'アイスソイラテ',
-                  '温かい緑茶',
-                  '冷たい緑茶',
                 ],
               ),
             ),
@@ -139,7 +130,8 @@ class _OrderPageState extends State<OrderPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const OrderListPage()),
+                      builder: (context) => const OrderListPage(),
+                    ),
                   );
                 }
               },

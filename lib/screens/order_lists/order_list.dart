@@ -3,6 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../edito_order_pages/edit_order_page.dart';
 import '../order_screen/components/custom_app_bar.dart';
 import '../order_screen/components/custom_elevated_button.dart';
+import '../order_screen/order_screen.dart';
 import 'components/order_loader.dart';
 
 class OrderListPage extends StatefulWidget {
@@ -139,9 +140,14 @@ class _OrderListPageState extends State<OrderListPage> {
           SizedBox(height: 10),
           CustomElevatedButton(
             onPressed: () {
-              Navigator.popUntil(context, (route) => route.isFirst);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        OrderPage(key: Key('order'), title: 'Order')),
+              );
             },
-            text: 'ホームに戻る',
+            text: '注文する',
           ),
         ],
       ),
