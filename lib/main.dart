@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
-import 'package:simple_lunch/screens/order_list.dart';
+import 'package:simple_lunch/screens/home.dart';
 import 'package:simple_lunch/screens/order.dart';
 import 'firebase_options.dart';
 
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Coffee Order',
       theme: _buildThemeData(context),
-      home: const OrderListPage(),
+      home: const HomePage(),
       routes: _buildRoutes(),
     );
   }
@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
             key: Key('order'),
             title: 'Coffee Order',
           ),
-      '/orderList': (context) => const OrderListPage(),
+      '/home': (context) => const HomePage(),
     };
   }
 }

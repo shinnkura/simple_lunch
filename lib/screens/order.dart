@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:simple_lunch/screens/order_list.dart';
+import 'package:simple_lunch/screens/home.dart';
 import '../constants.dart';
 // import 'custom_dropdown_button.dart';
 

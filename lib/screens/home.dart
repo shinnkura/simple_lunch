@@ -4,14 +4,14 @@ import 'edit_order.dart';
 import 'order.dart';
 import '../services/order_loader.dart';
 
-class OrderListPage extends StatefulWidget {
-  const OrderListPage({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  _OrderListPageState createState() => _OrderListPageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _OrderListPageState extends State<OrderListPage> {
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

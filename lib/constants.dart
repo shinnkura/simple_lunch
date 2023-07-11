@@ -1,8 +1,24 @@
 import 'package:flutter/material.dart';
 
-const kPrimaryColor = Color(0xFF795548);
-const kTextColor = Color(0xFF212121);
-const kBackgroundColor = Color(0xFFECEFF1);
+// Colors
+const kPrimaryColor = Colors.orange;
+const kAccentColor = Colors.deepPurple;
+const kBackgroundColor = Colors.white;
+const kErrorColor = Colors.red;
+const kTextColor = Colors.black;
+const kTextLightColor = Color.fromARGB(255, 172, 170, 170);
+const kTextErrorColor = Colors.white;
 
-const double kDefaultPadding = 20.0;
+// Padding
+const kDefaultPadding = 20.0;
 
+// Text Styles
+const kDefaultTextStyle = TextStyle(
+  color: kTextColor,
+  fontSize: 16.0,
+);
+
+const kErrorTextStyle = TextStyle(
+  color: kErrorColor,
+  fontSize: 16.0,
+);
