@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../edito_order_pages/edit_order_page.dart';
-import '../order_screen/components/custom_app_bar.dart';
-import '../order_screen/components/custom_elevated_button.dart';
 import '../order_screen/order_screen.dart';
 import 'components/order_loader.dart';
 
@@ -17,7 +15,10 @@ class _OrderListPageState extends State<OrderListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: 'Order List'),
+      appBar: AppBar(
+        title: Text('Order List'),
+        automaticallyImplyLeading: false,
+      ),
       body: FutureBuilder<Map<String, Map<String, List<Map<String, dynamic>>>>>(
         future: loadOrder(),
         builder: (context, snapshot) {
@@ -138,7 +139,7 @@ class _OrderListPageState extends State<OrderListPage> {
             ),
           ),
           SizedBox(height: 10),
-          CustomElevatedButton(
+          ElevatedButton(
             onPressed: () {
               Navigator.push(
                 context,
@@ -147,7 +148,7 @@ class _OrderListPageState extends State<OrderListPage> {
                         OrderPage(key: Key('order'), title: 'Order')),
               );
             },
-            text: '注文する',
+            child: Text('注文する'),
           ),
         ],
       ),
