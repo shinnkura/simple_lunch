@@ -1,0 +1,23 @@
+{
+  "name": "simple_lunch",
+  "version": "1.0.0",
+  "description": "社内で料理の注文を受け取るアプリ",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shinnkura/simple_lunch.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shinnkura/simple_lunch/issues"
+  },
+  "homepage": "https://github.com/shinnkura/simple_lunch#readme"
+}
