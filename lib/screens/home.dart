@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simple_lunch/constants.dart';
+import 'package:simple_lunch/screens/edit_menu.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'edit_order.dart';
 import 'order.dart';
@@ -13,6 +14,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String menuTitle = '今日の献立';
+  String menuDescription = '説明';
+
+  void updateMenu(String title, String description) {
+    setState(() {
+      menuTitle = title;
+      menuDescription = description;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +37,39 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => EditMenuScreen(
+                    updateMenu: updateMenu,
+                  ),
+                ),
+              );
+            },
+            child: Container(
+              padding: EdgeInsets.all(10.0),
+              width: double.infinity,
+              color: kPrimaryColor,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    menuTitle,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    menuDescription,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: 30),
           const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
