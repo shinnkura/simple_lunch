@@ -10,7 +10,7 @@ class EditOrderPage extends StatefulWidget {
   final String initialTime;
 
   const EditOrderPage({
-    super.key,
+    Key? key, // 追加: keyの型を指定する必要があります
     required this.name,
     required this.initialCoffeeType,
     required this.initialTime,
@@ -91,60 +91,36 @@ class _EditOrderPageState extends State<EditOrderPage> {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
-            if (!isOrderCancelled) ...[
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: DropdownButton<String>(
-                  value: dropdownValue,
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      dropdownValue = newValue!;
-                    });
-                  },
-                  items: const [
-                    'コーヒー',
-                    'カフェオレ',
-                    'ちょいふわカフェオレ',
-                  ].map<DropdownMenuItem<String>>((value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                ),
-              ),
-              const SizedBox(height: 20),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: DropdownButton<String>(
-                  value: selectedTime,
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      selectedTime = newValue!;
-                    });
-                  },
-                  items: <String>['15時30分', '17時30分']
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                ),
-              ),
-              const SizedBox(height: 20),
-              CheckboxListTile(
-                title: const Text("少なめ（250ml程度）"),
-                value: small,
-                onChanged: (bool? value) {
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: DropdownButton<String>(
+                value: selectedTime,
+                onChanged: (String? newValue) {
                   setState(() {
-                    small = value!;
+                    selectedTime = newValue!;
                   });
                 },
+                items: <String>['15時30分', '17時30分']
+                    .map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
               ),
-              const SizedBox(height: 20),
-            ],
+            ),
+            const SizedBox(height: 20),
+            CheckboxListTile(
+              title: const Text("少なめ（250ml程度）"),
+              value: small,
+              onChanged: (bool? value) {
+                setState(() {
+                  small = value!;
+                });
+              },
+            ),
+            const SizedBox(height: 20),
+            // },  // <- 修正: ここで閉じカッコが不要なため削除
             Container(
               width: double.infinity,
               child: ElevatedButton(

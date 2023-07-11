@@ -99,33 +99,6 @@ class _OrderPageState extends State<OrderPage> {
                 }).toList(),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: DropdownButton<String>(
-                value: dropdownValue,
-                onChanged: (String? newValue) {
-                  setState(() {
-                    dropdownValue = newValue!;
-                  });
-                },
-                items: <String>['コーヒー', 'カフェオレ', 'ちょいふわカフェオレ']
-                    .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-              ),
-            ),
-            CheckboxListTile(
-              title: const Text("少なめ（250ml程度）"),
-              value: small,
-              onChanged: (bool? value) {
-                setState(() {
-                  small = value!;
-                });
-              },
-            ),
             ElevatedButton(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {

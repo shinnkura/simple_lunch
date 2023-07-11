@@ -138,13 +138,13 @@ class _HomePageState extends State<HomePage> {
                                                 color: Colors.brown[700],
                                               ),
                                             ),
-                                            Text(
-                                              order['small'] ? '  少なめ' : '',
-                                              style: TextStyle(
-                                                fontSize: 16,
-                                                color: Colors.orange,
-                                              ),
-                                            ),
+                                            // Text(
+                                            //   order['small'] ? '  少なめ' : '',
+                                            //   style: TextStyle(
+                                            //     fontSize: 16,
+                                            //     color: Colors.orange,
+                                            //   ),
+                                            // ),
                                           ],
                                         )
                                       ],
