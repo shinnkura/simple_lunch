@@ -7,11 +7,13 @@ import '../constants.dart';
 class EditOrderPage extends StatefulWidget {
   final String name;
   final String initialTime;
+  final String initialComment;
 
   const EditOrderPage({
     Key? key,
     required this.name,
     required this.initialTime,
+    required this.initialComment,
   });
 
   @override
@@ -61,7 +63,8 @@ class _EditOrderPageState extends State<EditOrderPage> {
   void initState() {
     super.initState();
     _nameController = TextEditingController(text: widget.name);
-    _commentController = TextEditingController();
+    // _commentController = TextEditingController();
+    _commentController = TextEditingController(text: widget.initialComment);
     selectedTime = widget.initialTime;
   }
 

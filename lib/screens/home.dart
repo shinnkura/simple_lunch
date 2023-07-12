@@ -58,6 +58,8 @@ class _HomePageState extends State<HomePage> {
                 MaterialPageRoute(
                   builder: (context) => EditMenuScreen(
                     updateMenu: updateMenu,
+                    initialMenuTitle: menuTitle,
+                    initialMenuDescription: menuDescription,
                   ),
                 ),
               );
@@ -183,7 +185,6 @@ class _HomePageState extends State<HomePage> {
                                         return Dismissible(
                                           key: Key(order['name']),
                                           onDismissed: (direction) async {
-                                            // スワイプされたときに該当のorderを削除します。
                                             CollectionReference orders =
                                                 FirebaseFirestore.instance
                                                     .collection('orders');
@@ -278,7 +279,35 @@ class _HomePageState extends State<HomePage> {
                                                         Icons.edit,
                                                         color: kTextColor,
                                                       ),
-                                                      onPressed: () {
+                                                      onPressed: () async {
+                                                        String initialComment =
+                                                            '';
+                                                        CollectionReference
+                                                            orders =
+                                                            FirebaseFirestore
+                                                                .instance
+                                                                .collection(
+                                                                    'orders');
+                                                        QuerySnapshot
+                                                            querySnapshot =
+                                                            await orders.get();
+                                                        for (var doc
+                                                            in querySnapshot
+                                                                .docs) {
+                                                          Map<String, dynamic>
+                                                              data = doc.data()
+                                                                  as Map<String,
+                                                                      dynamic>;
+                                                          if (data['name'] ==
+                                                                  order[
+                                                                      'name'] &&
+                                                              data['time'] ==
+                                                                  time) {
+                                                            initialComment =
+                                                                data['comment'];
+                                                            break;
+                                                          }
+                                                        }
                                                         Navigator.push(
                                                           context,
                                                           MaterialPageRoute(
@@ -287,6 +316,8 @@ class _HomePageState extends State<HomePage> {
                                                               name:
                                                                   order['name'],
                                                               initialTime: time,
+                                                              initialComment:
+                                                                  initialComment,
                                                             ),
                                                           ),
                                                         );

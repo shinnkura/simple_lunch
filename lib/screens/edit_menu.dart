@@ -4,8 +4,14 @@ import '../constants.dart';
 
 class EditMenuScreen extends StatefulWidget {
   final Function(String, String) updateMenu;
+  final String initialMenuTitle;
+  final String initialMenuDescription;
 
-  EditMenuScreen({required this.updateMenu});
+  EditMenuScreen({
+    required this.updateMenu,
+    required this.initialMenuTitle,
+    required this.initialMenuDescription,
+  });
 
   @override
   State<EditMenuScreen> createState() => _EditMenuScreenState();
@@ -15,7 +21,6 @@ class _EditMenuScreenState extends State<EditMenuScreen> {
   final _formKey = GlobalKey<FormState>();
 
   String _menuTitle = '';
-
   String _menuDescription = '';
 
   @override
@@ -38,8 +43,10 @@ class _EditMenuScreenState extends State<EditMenuScreen> {
         child: Form(
           key: _formKey,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               TextFormField(
+                initialValue: widget.initialMenuTitle,
                 decoration: InputDecoration(
                   labelText: '本日の献立',
                   border: OutlineInputBorder(),
@@ -57,6 +64,7 @@ class _EditMenuScreenState extends State<EditMenuScreen> {
               ),
               const SizedBox(height: 16.0),
               TextFormField(
+                initialValue: widget.initialMenuDescription,
                 maxLines: 3,
                 decoration: const InputDecoration(
                   labelText: '説明',
@@ -78,8 +86,15 @@ class _EditMenuScreenState extends State<EditMenuScreen> {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: kPrimaryColor,
+                  padding: const EdgeInsets.all(16.0),
                 ),
-                child: const Text('保存', style: TextStyle(color: kTextColor)),
+                child: const Text(
+                  '保存',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: kTextColor,
+                  ),
+                ),
               ),
             ],
           ),
