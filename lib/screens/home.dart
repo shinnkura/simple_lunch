@@ -141,112 +141,136 @@ class _HomePageState extends State<HomePage> {
                       int totalOrdersAtThisTime = orders[time]!
                           .values
                           .fold(0, (prev, curr) => prev + curr.length);
-                      return ExpansionTile(
-                        title: Text(
-                          '$time     $totalOrdersAtThisTime名',
-                          style: TextStyle(
-                            color: kTextColor,
-                            fontSize: 20,
-                          ),
-                        ),
-                        children: orders[time]!.entries.map((entry) {
-                          List<Map<String, dynamic>> ordersList = entry.value;
-                          return Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ...ordersList.map((order) {
-                                  return Padding(
-                                    padding: const EdgeInsets.all(0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            InkWell(
-                                              onTap: () {
-                                                setState(() {
-                                                  checkboxStates[
-                                                          order['name']] =
-                                                      !checkboxStates[
-                                                          order['name']]!;
-                                                });
-                                              },
-                                              child: Checkbox(
-                                                value: checkboxStates[
-                                                        order['name']] ??
-                                                    false,
-                                                onChanged: (bool? value) {
-                                                  setState(() {
-                                                    checkboxStates[
-                                                        order['name']] = value!;
-                                                  });
-                                                },
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: Text(
-                                                '${order['name']}',
-                                                style: TextStyle(
-                                                  fontSize: 16,
-                                                  color: checkboxStates[
+                      return ExpansionPanelList(
+                        expansionCallback: (int index, bool isExpanded) {
+                          setState(() {
+                            checkboxStates[time] = !isExpanded;
+                          });
+                        },
+                        children: [
+                          ExpansionPanel(
+                            headerBuilder:
+                                (BuildContext context, bool isExpanded) {
+                              return ListTile(
+                                title: Text(
+                                  '$time     $totalOrdersAtThisTime名',
+                                  style: TextStyle(
+                                    color: kTextColor,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              );
+                            },
+                            body: Column(
+                              children: orders[time]!.entries.map((entry) {
+                                List<Map<String, dynamic>> ordersList =
+                                    entry.value;
+                                return Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      ...ordersList.map((order) {
+                                        return Padding(
+                                          padding: const EdgeInsets.all(0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  InkWell(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        checkboxStates[
+                                                                order['name']] =
+                                                            !checkboxStates[
+                                                                order['name']]!;
+                                                      });
+                                                    },
+                                                    child: Checkbox(
+                                                      value: checkboxStates[
                                                               order['name']] ??
-                                                          false
-                                                      ? Colors.grey
-                                                      : kTextColor,
-                                                  decoration: checkboxStates[
-                                                              order['name']] ??
-                                                          false
-                                                      ? TextDecoration
-                                                          .lineThrough
-                                                      : TextDecoration.none,
-                                                ),
-                                              ),
-                                            ),
-                                            IconButton(
-                                              icon: Icon(
-                                                Icons.edit,
-                                                color: kTextColor,
-                                              ),
-                                              onPressed: () {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        EditOrderPage(
-                                                      name: order['name'],
-                                                      initialTime: time,
+                                                          false,
+                                                      onChanged: (bool? value) {
+                                                        setState(() {
+                                                          checkboxStates[order[
+                                                              'name']] = value!;
+                                                        });
+                                                      },
+                                                      activeColor:
+                                                          Colors.orange,
                                                     ),
                                                   ),
-                                                );
-                                              },
-                                            ),
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 50.0),
-                                          child: Text(
-                                            '${order['comment']}',
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              color: Colors.grey[500],
-                                            ),
+                                                  Expanded(
+                                                    child: Text(
+                                                      '${order['name']}',
+                                                      style: TextStyle(
+                                                        fontSize: 16,
+                                                        color: checkboxStates[
+                                                                    order[
+                                                                        'name']] ??
+                                                                false
+                                                            ? Colors.grey
+                                                            : kTextColor,
+                                                        decoration:
+                                                            checkboxStates[order[
+                                                                        'name']] ??
+                                                                    false
+                                                                ? TextDecoration
+                                                                    .lineThrough
+                                                                : TextDecoration
+                                                                    .none,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  IconButton(
+                                                    icon: Icon(
+                                                      Icons.edit,
+                                                      color: kTextColor,
+                                                    ),
+                                                    onPressed: () {
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              EditOrderPage(
+                                                            name: order['name'],
+                                                            initialTime: time,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 50.0),
+                                                child: Text(
+                                                  '${order['comment']}',
+                                                  style: TextStyle(
+                                                    fontSize: 16,
+                                                    color: Colors.grey[500],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                }).toList(),
-                              ],
+                                        );
+                                      }).toList(),
+                                    ],
+                                  ),
+                                );
+                              }).toList(),
                             ),
-                          );
-                        }).toList(),
+                            isExpanded: checkboxStates[time] ?? false,
+                          ),
+                        ],
                       );
                     },
                   );
