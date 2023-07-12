@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> saveOrder(
   String time,
-  String coffeeType,
+  // String coffeeType,
   String name,
   String comment, // 新しいパラメータ
   // bool small,
@@ -13,7 +13,7 @@ Future<void> saveOrder(
   // 保存するデータを作成します
   Map<String, dynamic> order = {
     'time': time,
-    'coffeeType': coffeeType,
+    // 'coffeeType': coffeeType,
     'name': name,
     'comment': comment, // コメントを保存
     // 'small': small,

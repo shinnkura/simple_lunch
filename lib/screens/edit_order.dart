@@ -6,13 +6,13 @@ import '../constants.dart';
 
 class EditOrderPage extends StatefulWidget {
   final String name;
-  final String initialCoffeeType;
+  // final String initialCoffeeType;
   final String initialTime;
 
   const EditOrderPage({
     Key? key, // 追加: keyの型を指定する必要があります
     required this.name,
-    required this.initialCoffeeType,
+    // required this.initialCoffeeType,
     required this.initialTime,
   });
 
@@ -35,11 +35,11 @@ class _EditOrderPageState extends State<EditOrderPage> {
     for (var doc in querySnapshot.docs) {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
       if (data['name'] == widget.name &&
-          data['coffeeType'] == widget.initialCoffeeType &&
+          // data['coffeeType'] == widget.initialCoffeeType &&
           data['time'] == widget.initialTime) {
         doc.reference.update({
           'name': _nameController.text,
-          'coffeeType': dropdownValue,
+          // 'coffeeType': dropdownValue,
           'time': selectedTime,
           'small': small,
           'comment': _commentController.text, // コメントを更新
@@ -56,7 +56,7 @@ class _EditOrderPageState extends State<EditOrderPage> {
     for (var doc in querySnapshot.docs) {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
       if (data['name'] == widget.name &&
-          data['coffeeType'] == widget.initialCoffeeType &&
+          // data['coffeeType'] == widget.initialCoffeeType &&
           data['time'] == widget.initialTime) {
         doc.reference.delete();
         break;
@@ -69,7 +69,7 @@ class _EditOrderPageState extends State<EditOrderPage> {
     super.initState();
     _nameController = TextEditingController(text: widget.name);
     _commentController = TextEditingController(); // コントローラーを初期化
-    dropdownValue = widget.initialCoffeeType;
+    // dropdownValue = widget.initialCoffeeType;
     selectedTime = widget.initialTime;
   }
 

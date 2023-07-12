@@ -18,15 +18,15 @@ class _OrderPageState extends State<OrderPage> {
   final _nameController = TextEditingController();
   final _commentController = TextEditingController();
 
-  String dropdownValue = 'コーヒー';
+  // String dropdownValue = 'コーヒー';
   String timeDropdownValue = '12時30分';
   bool small = false;
 
   Future<void> _saveOrder(
     String time,
-    String coffeeType,
+    // String coffeeType,
     String name,
-    bool small,
+    // bool small,
     String comment,
   ) async {
     CollectionReference orders =
@@ -34,9 +34,9 @@ class _OrderPageState extends State<OrderPage> {
     return orders
         .add({
           'time': time,
-          'coffeeType': coffeeType,
+          // 'coffeeType': coffeeType,
           'name': name,
-          'small': small,
+          // 'small': small,
           'comment': comment,
         })
         .then((value) => print("Order Added"))
@@ -175,9 +175,9 @@ class _OrderPageState extends State<OrderPage> {
                 if (_formKey.currentState!.validate()) {
                   _saveOrder(
                     timeDropdownValue,
-                    dropdownValue,
+                    // dropdownValue,
                     _nameController.text,
-                    small,
+                    // small,
                     _commentController.text,
                   );
                   Navigator.push(

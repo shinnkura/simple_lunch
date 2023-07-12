@@ -143,8 +143,10 @@ class _HomePageState extends State<HomePage> {
                       return ExpansionTile(
                         title: Text(
                           '$time     $totalOrdersAtThisTime名',
-                          style:
-                              TextStyle(color: Colors.brown[800], fontSize: 20),
+                          style: TextStyle(
+                            color: Colors.brown[800],
+                            fontSize: 20,
+                          ),
                         ),
                         children: orders[time]!.entries.map((entry) {
                           String coffeeType = entry.key;
@@ -161,13 +163,6 @@ class _HomePageState extends State<HomePage> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    '$coffeeType     ${ordersList.length}名',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18,
-                                        color: Colors.brown[800]),
-                                  ),
                                   Divider(color: Colors.brown[800]),
                                   ...ordersList.map((order) {
                                     return Row(
@@ -186,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                                                 builder: (context) =>
                                                     EditOrderPage(
                                                   name: order['name'],
-                                                  initialCoffeeType: coffeeType,
+                                                  // initialCoffeeType: coffeeType,
                                                   initialTime: time,
                                                 ),
                                               ),
@@ -206,6 +201,10 @@ class _HomePageState extends State<HomePage> {
                                             ),
                                             Text(
                                               'コメント: ${order['comment']}',
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                color: Colors.brown[700],
+                                              ),
                                             ),
                                           ],
                                         )
