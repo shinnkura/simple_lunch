@@ -88,6 +88,8 @@ class _OrderPageState extends State<OrderPage> {
                 style: Theme.of(context).textTheme.titleMedium,
                 decoration: const InputDecoration(
                   labelText: '名前',
+                  border: OutlineInputBorder(),
+                  contentPadding: EdgeInsets.all(10),
                   labelStyle: TextStyle(color: kTextColor),
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: kTextColor),
@@ -104,45 +106,70 @@ class _OrderPageState extends State<OrderPage> {
                 },
               ),
             ),
+            const SizedBox(height: 20.0),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: TextFormField(
-                controller: _commentController, // コメント入力フィールド
+                maxLines: 2,
+                controller: _commentController,
                 style: Theme.of(context).textTheme.titleMedium,
                 decoration: const InputDecoration(
                   labelText: 'コメント',
                   labelStyle: TextStyle(color: kTextColor),
+                  border: OutlineInputBorder(),
+                  contentPadding: EdgeInsets.all(10),
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: kTextColor),
                   ),
                 ),
               ),
             ),
+            const SizedBox(height: 20.0),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: DropdownButton<String>(
-                value: timeDropdownValue,
-                onChanged: (String? newValue) {
-                  setState(() {
-                    timeDropdownValue = newValue!;
-                  });
-                },
-                items: <String>[
-                  "12時30分",
-                  "13時00分",
-                  "13時30分",
-                  "14時00分",
-                  "14時30分",
-                  "15時00分",
-                  "15時30分"
-                ].map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
+              child: Align(
+                alignment: Alignment.center,
+                child: DropdownButton<String>(
+                  value: timeDropdownValue,
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      timeDropdownValue = newValue!;
+                    });
+                  },
+                  underline: Container(
+                    height: 2,
+                    color: kTextColor,
+                  ),
+                  icon: Icon(Icons.arrow_downward, color: kTextColor),
+                  items: <String>[
+                    "12時30分",
+                    "13時00分",
+                    "13時30分",
+                    "14時00分",
+                    "14時30分",
+                    "15時00分",
+                    "15時30分"
+                  ].map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 10,
+                          horizontal: 20,
+                        ),
+                        child: Text(
+                          value,
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
               ),
             ),
+            const SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {

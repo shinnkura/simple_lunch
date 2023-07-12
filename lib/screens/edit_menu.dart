@@ -57,12 +57,6 @@ class EditMenuScreen extends StatelessWidget {
                   border: OutlineInputBorder(),
                   contentPadding: EdgeInsets.all(10),
                 ),
-                // validator: (value) {
-                //   if (value == null || value.isEmpty) {
-                //     return '説明を入力してください';
-                //   }
-                //   return null;
-                // },
                 onSaved: (value) {
                   _menuDescription = value!;
                 },
@@ -76,7 +70,10 @@ class EditMenuScreen extends StatelessWidget {
                     Navigator.pop(context);
                   }
                 },
-                child: const Text('保存'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: kPrimaryColor,
+                ),
+                child: const Text('保存', style: TextStyle(color: kTextColor)),
               ),
             ],
           ),
