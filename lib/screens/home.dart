@@ -150,12 +150,19 @@ class _HomePageState extends State<HomePage> {
                           ExpansionPanel(
                             headerBuilder:
                                 (BuildContext context, bool isExpanded) {
-                              return ListTile(
-                                title: Text(
-                                  '$time     $totalOrdersAtThisTime名',
-                                  style: TextStyle(
-                                    color: kTextColor,
-                                    fontSize: 20,
+                              return GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    checkboxStates[time] = !isExpanded;
+                                  });
+                                },
+                                child: ListTile(
+                                  title: Text(
+                                    '$time     $totalOrdersAtThisTime名',
+                                    style: TextStyle(
+                                      color: kTextColor,
+                                      fontSize: 20,
+                                    ),
                                   ),
                                 ),
                               );
