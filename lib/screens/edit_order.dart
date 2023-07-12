@@ -77,10 +77,7 @@ class _EditOrderPageState extends State<EditOrderPage> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: kTextColor),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const HomePage()),
-            );
+            Navigator.pop(context);
           },
         ),
       ),
