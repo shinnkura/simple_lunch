@@ -2,13 +2,21 @@ import 'package:flutter/material.dart';
 
 import '../constants.dart';
 
-class EditMenuScreen extends StatelessWidget {
+class EditMenuScreen extends StatefulWidget {
   final Function(String, String) updateMenu;
-  final _formKey = GlobalKey<FormState>();
-  String _menuTitle = '';
-  String _menuDescription = '';
 
   EditMenuScreen({required this.updateMenu});
+
+  @override
+  State<EditMenuScreen> createState() => _EditMenuScreenState();
+}
+
+class _EditMenuScreenState extends State<EditMenuScreen> {
+  final _formKey = GlobalKey<FormState>();
+
+  String _menuTitle = '';
+
+  String _menuDescription = '';
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +74,7 @@ class EditMenuScreen extends StatelessWidget {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
-                    updateMenu(_menuTitle, _menuDescription);
+                    widget.updateMenu(_menuTitle, _menuDescription);
                     Navigator.pop(context);
                   }
                 },
