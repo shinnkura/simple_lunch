@@ -204,141 +204,132 @@ class _HomePageState extends State<HomePage> {
                                             }
                                           },
                                           background: Container(
-                                            color: Colors.red, // スワイプ時に表示される背景色
+                                            color: Colors.red,
                                             child: Align(
                                               alignment: Alignment.centerRight,
                                               child: Padding(
                                                 padding: const EdgeInsets.only(
-                                                    right: 20.0),
+                                                  right: 20.0,
+                                                ),
                                                 child: Icon(Icons.delete,
                                                     color: Colors.white),
                                               ),
                                             ),
                                           ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(0),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    InkWell(
-                                                      onTap: () {
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  InkWell(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        checkboxStates[
+                                                                order['name']] =
+                                                            !checkboxStates[
+                                                                order['name']]!;
+                                                      });
+                                                    },
+                                                    child: Checkbox(
+                                                      value: checkboxStates[
+                                                              order['name']] ??
+                                                          false,
+                                                      onChanged: (bool? value) {
                                                         setState(() {
                                                           checkboxStates[order[
-                                                                  'name']] =
-                                                              !checkboxStates[
-                                                                  order[
-                                                                      'name']]!;
+                                                              'name']] = value!;
                                                         });
                                                       },
-                                                      child: Checkbox(
-                                                        value: checkboxStates[
-                                                                order[
-                                                                    'name']] ??
-                                                            false,
-                                                        onChanged:
-                                                            (bool? value) {
-                                                          setState(() {
-                                                            checkboxStates[order[
-                                                                    'name']] =
-                                                                value!;
-                                                          });
-                                                        },
-                                                        activeColor:
-                                                            Colors.orange,
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      child: Text(
-                                                        '${order['name']}',
-                                                        style: TextStyle(
-                                                          fontSize: 16,
-                                                          color: checkboxStates[
-                                                                      order[
-                                                                          'name']] ??
-                                                                  false
-                                                              ? Colors.grey
-                                                              : kTextColor,
-                                                          decoration: checkboxStates[
-                                                                      order[
-                                                                          'name']] ??
-                                                                  false
-                                                              ? TextDecoration
-                                                                  .lineThrough
-                                                              : TextDecoration
-                                                                  .none,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    IconButton(
-                                                      icon: Icon(
-                                                        Icons.edit,
-                                                        color: kTextColor,
-                                                      ),
-                                                      onPressed: () async {
-                                                        String initialComment =
-                                                            '';
-                                                        CollectionReference
-                                                            orders =
-                                                            FirebaseFirestore
-                                                                .instance
-                                                                .collection(
-                                                                    'orders');
-                                                        QuerySnapshot
-                                                            querySnapshot =
-                                                            await orders.get();
-                                                        for (var doc
-                                                            in querySnapshot
-                                                                .docs) {
-                                                          Map<String, dynamic>
-                                                              data = doc.data()
-                                                                  as Map<String,
-                                                                      dynamic>;
-                                                          if (data['name'] ==
-                                                                  order[
-                                                                      'name'] &&
-                                                              data['time'] ==
-                                                                  time) {
-                                                            initialComment =
-                                                                data['comment'];
-                                                            break;
-                                                          }
-                                                        }
-                                                        Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                EditOrderPage(
-                                                              name:
-                                                                  order['name'],
-                                                              initialTime: time,
-                                                              initialComment:
-                                                                  initialComment,
-                                                            ),
-                                                          ),
-                                                        );
-                                                      },
-                                                    ),
-                                                  ],
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 50.0),
-                                                  child: Text(
-                                                    '${order['comment']}',
-                                                    style: TextStyle(
-                                                      fontSize: 16,
-                                                      color: Colors.grey[500],
+                                                      activeColor:
+                                                          Colors.orange,
                                                     ),
                                                   ),
+                                                  Expanded(
+                                                    child: Text(
+                                                      '${order['name']}',
+                                                      style: TextStyle(
+                                                        fontSize: 16,
+                                                        color: checkboxStates[
+                                                                    order[
+                                                                        'name']] ??
+                                                                false
+                                                            ? Colors.grey
+                                                            : kTextColor,
+                                                        decoration:
+                                                            checkboxStates[order[
+                                                                        'name']] ??
+                                                                    false
+                                                                ? TextDecoration
+                                                                    .lineThrough
+                                                                : TextDecoration
+                                                                    .none,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  IconButton(
+                                                    icon: Icon(
+                                                      Icons.edit,
+                                                      color: kTextColor,
+                                                    ),
+                                                    onPressed: () async {
+                                                      String initialComment =
+                                                          '';
+                                                      CollectionReference
+                                                          orders =
+                                                          FirebaseFirestore
+                                                              .instance
+                                                              .collection(
+                                                                  'orders');
+                                                      QuerySnapshot
+                                                          querySnapshot =
+                                                          await orders.get();
+                                                      for (var doc
+                                                          in querySnapshot
+                                                              .docs) {
+                                                        Map<String, dynamic>
+                                                            data = doc.data()
+                                                                as Map<String,
+                                                                    dynamic>;
+                                                        if (data['name'] ==
+                                                                order['name'] &&
+                                                            data['time'] ==
+                                                                time) {
+                                                          initialComment =
+                                                              data['comment'];
+                                                          break;
+                                                        }
+                                                      }
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              EditOrderPage(
+                                                            name: order['name'],
+                                                            initialTime: time,
+                                                            initialComment:
+                                                                initialComment,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 50.0),
+                                                child: Text(
+                                                  '${order['comment']}',
+                                                  style: TextStyle(
+                                                    fontSize: 16,
+                                                    color: Colors.grey[500],
+                                                  ),
                                                 ),
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
                                         );
                                       }).toList(),
