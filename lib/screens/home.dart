@@ -83,8 +83,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          SizedBox(height: 30),
-          const SizedBox(height: 20),
+          const SizedBox(height: 50),
           ElevatedButton(
             onPressed: () {
               Navigator.push(
@@ -121,7 +120,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 50),
           Expanded(
             child: FutureBuilder<
                 Map<String, Map<String, List<Map<String, dynamic>>>>>(
@@ -297,7 +296,7 @@ class _HomePageState extends State<HomePage> {
               },
               backgroundColor: Colors.orange[500],
               heroTag: null,
-              child: Icon(Icons.mail),
+              child: Icon(Icons.receipt_long),
             ),
           ),
         ],

@@ -19,7 +19,7 @@ class _OrderPageState extends State<OrderPage> {
   final _commentController = TextEditingController();
 
   // String dropdownValue = 'コーヒー';
-  String timeDropdownValue = '12時30分';
+  String timeDropdownValue = '13時00分';
   bool small = false;
 
   Future<void> _saveOrder(
@@ -90,10 +90,6 @@ class _OrderPageState extends State<OrderPage> {
                   labelText: '名前',
                   border: OutlineInputBorder(),
                   contentPadding: EdgeInsets.all(10),
-                  labelStyle: TextStyle(color: kTextColor),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: kTextColor),
-                  ),
                 ),
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -110,17 +106,13 @@ class _OrderPageState extends State<OrderPage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: TextFormField(
-                maxLines: 2,
+                // maxLines: 2,
                 controller: _commentController,
                 style: Theme.of(context).textTheme.titleMedium,
                 decoration: const InputDecoration(
                   labelText: 'コメント',
-                  labelStyle: TextStyle(color: kTextColor),
                   border: OutlineInputBorder(),
                   contentPadding: EdgeInsets.all(10),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: kTextColor),
-                  ),
                 ),
               ),
             ),
@@ -142,13 +134,11 @@ class _OrderPageState extends State<OrderPage> {
                   ),
                   icon: Icon(Icons.arrow_downward, color: kTextColor),
                   items: <String>[
-                    "12時30分",
                     "13時00分",
                     "13時30分",
                     "14時00分",
                     "14時30分",
-                    "15時00分",
-                    "15時30分"
+                    "15時00分"
                   ].map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
