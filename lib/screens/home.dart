@@ -302,7 +302,8 @@ class _HomePageState extends State<HomePage> {
                                                           break;
                                                         }
                                                       }
-                                                      Navigator.push(
+                                                      final result =
+                                                          await Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
                                                           builder: (context) =>
@@ -314,6 +315,13 @@ class _HomePageState extends State<HomePage> {
                                                           ),
                                                         ),
                                                       );
+
+                                                      if (result == 'updated' ||
+                                                          result ==
+                                                              'cancelled') {
+                                                        setState(
+                                                            () {}); // This will trigger a rebuild of the HomePage, which will cause the FutureBuilder to re-fetch the orders.
+                                                      }
                                                     },
                                                   ),
                                                 ],

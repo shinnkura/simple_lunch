@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:simple_lunch/screens/home.dart';
 
 import '../constants.dart';
 
@@ -151,11 +150,8 @@ class _EditOrderPageState extends State<EditOrderPage> {
                 onPressed: () async {
                   if (!isOrderCancelled) {
                     await updateOrder();
+                    Navigator.pop(context, 'updated');
                   }
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomePage()),
-                  );
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
@@ -183,12 +179,7 @@ class _EditOrderPageState extends State<EditOrderPage> {
               child: ElevatedButton(
                 onPressed: () async {
                   await cancelOrder();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => HomePage(),
-                    ),
-                  );
+                  Navigator.pop(context, 'cancelled');
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
