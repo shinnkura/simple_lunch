@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_lunch/constants.dart';
 import 'package:simple_lunch/screens/edit_menu.dart';
@@ -179,93 +180,124 @@ class _HomePageState extends State<HomePage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       ...ordersList.map((order) {
-                                        return Padding(
-                                          padding: const EdgeInsets.all(0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  InkWell(
-                                                    onTap: () {
-                                                      setState(() {
-                                                        checkboxStates[
-                                                                order['name']] =
-                                                            !checkboxStates[
-                                                                order['name']]!;
-                                                      });
-                                                    },
-                                                    child: Checkbox(
-                                                      value: checkboxStates[
-                                                              order['name']] ??
-                                                          false,
-                                                      onChanged: (bool? value) {
+                                        return Dismissible(
+                                          key: Key(order['name']),
+                                          onDismissed: (direction) async {
+                                            // スワイプされたときに該当のorderを削除します。
+                                            CollectionReference orders =
+                                                FirebaseFirestore.instance
+                                                    .collection('orders');
+                                            QuerySnapshot querySnapshot =
+                                                await orders.get();
+                                            for (var doc
+                                                in querySnapshot.docs) {
+                                              Map<String, dynamic> data =
+                                                  doc.data()
+                                                      as Map<String, dynamic>;
+                                              if (data['name'] ==
+                                                      order['name'] &&
+                                                  data['time'] == time) {
+                                                doc.reference.delete();
+                                                break;
+                                              }
+                                            }
+                                          },
+                                          background:
+                                              Container(color: Colors.red),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    InkWell(
+                                                      onTap: () {
                                                         setState(() {
                                                           checkboxStates[order[
-                                                              'name']] = value!;
+                                                                  'name']] =
+                                                              !checkboxStates[
+                                                                  order[
+                                                                      'name']]!;
                                                         });
                                                       },
-                                                      activeColor:
-                                                          Colors.orange,
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Text(
-                                                      '${order['name']}',
-                                                      style: TextStyle(
-                                                        fontSize: 16,
-                                                        color: checkboxStates[
-                                                                    order[
-                                                                        'name']] ??
-                                                                false
-                                                            ? Colors.grey
-                                                            : kTextColor,
-                                                        decoration:
+                                                      child: Checkbox(
+                                                        value: checkboxStates[
+                                                                order[
+                                                                    'name']] ??
+                                                            false,
+                                                        onChanged:
+                                                            (bool? value) {
+                                                          setState(() {
                                                             checkboxStates[order[
-                                                                        'name']] ??
-                                                                    false
-                                                                ? TextDecoration
-                                                                    .lineThrough
-                                                                : TextDecoration
-                                                                    .none,
+                                                                    'name']] =
+                                                                value!;
+                                                          });
+                                                        },
+                                                        activeColor:
+                                                            Colors.orange,
                                                       ),
                                                     ),
-                                                  ),
-                                                  IconButton(
-                                                    icon: Icon(
-                                                      Icons.edit,
-                                                      color: kTextColor,
-                                                    ),
-                                                    onPressed: () {
-                                                      Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              EditOrderPage(
-                                                            name: order['name'],
-                                                            initialTime: time,
-                                                          ),
+                                                    Expanded(
+                                                      child: Text(
+                                                        '${order['name']}',
+                                                        style: TextStyle(
+                                                          fontSize: 16,
+                                                          color: checkboxStates[
+                                                                      order[
+                                                                          'name']] ??
+                                                                  false
+                                                              ? Colors.grey
+                                                              : kTextColor,
+                                                          decoration: checkboxStates[
+                                                                      order[
+                                                                          'name']] ??
+                                                                  false
+                                                              ? TextDecoration
+                                                                  .lineThrough
+                                                              : TextDecoration
+                                                                  .none,
                                                         ),
-                                                      );
-                                                    },
-                                                  ),
-                                                ],
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 50.0),
-                                                child: Text(
-                                                  '${order['comment']}',
-                                                  style: TextStyle(
-                                                    fontSize: 16,
-                                                    color: Colors.grey[500],
+                                                      ),
+                                                    ),
+                                                    IconButton(
+                                                      icon: Icon(
+                                                        Icons.edit,
+                                                        color: kTextColor,
+                                                      ),
+                                                      onPressed: () {
+                                                        Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                EditOrderPage(
+                                                              name:
+                                                                  order['name'],
+                                                              initialTime: time,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                    ),
+                                                  ],
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 50.0),
+                                                  child: Text(
+                                                    '${order['comment']}',
+                                                    style: TextStyle(
+                                                      fontSize: 16,
+                                                      color: Colors.grey[500],
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         );
                                       }).toList(),
