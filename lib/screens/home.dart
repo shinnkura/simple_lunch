@@ -336,7 +336,7 @@ class _HomePageState extends State<HomePage> {
             child: FloatingActionButton(
               onPressed: () async {
                 const url =
-                    'http://docs.google.com/forms/d/e/1FAIpQLSc1fO0xXfhBt_h-m62Evx0wL_J_z60Xe4rfH-zvxDGnaw-9aQ/viewform';
+                    'https://iris-paste-aba.notion.site/8b247e0e8a8648509d1cce35dedc6c10';
                 if (await canLaunchUrl(Uri.parse(url))) {
                   await launchUrl(Uri.parse(url));
                 } else {
