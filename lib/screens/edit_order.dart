@@ -85,7 +85,7 @@ class _EditOrderPageState extends State<EditOrderPage> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20.0 * 1.5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[

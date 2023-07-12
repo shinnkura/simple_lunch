@@ -38,63 +38,66 @@ class _EditMenuScreenState extends State<EditMenuScreen> {
         ),
         backgroundColor: kPrimaryColor,
       ),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            TextFormField(
-              initialValue: widget.initialMenuTitle,
-              decoration: InputDecoration(
-                labelText: '本日の献立',
-                border: OutlineInputBorder(),
-                contentPadding: EdgeInsets.all(10),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0 * 1.5),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              TextFormField(
+                initialValue: widget.initialMenuTitle,
+                decoration: InputDecoration(
+                  labelText: '本日の献立',
+                  border: OutlineInputBorder(),
+                  contentPadding: EdgeInsets.all(10),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return '献立を入力してください';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _menuTitle = value!;
+                },
               ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return '献立を入力してください';
-                }
-                return null;
-              },
-              onSaved: (value) {
-                _menuTitle = value!;
-              },
-            ),
-            const SizedBox(height: 16.0),
-            TextFormField(
-              initialValue: widget.initialMenuDescription,
-              maxLines: 3,
-              decoration: const InputDecoration(
-                labelText: '説明',
-                border: OutlineInputBorder(),
-                contentPadding: EdgeInsets.all(10),
+              const SizedBox(height: 16.0),
+              TextFormField(
+                initialValue: widget.initialMenuDescription,
+                maxLines: 3,
+                decoration: const InputDecoration(
+                  labelText: '説明',
+                  border: OutlineInputBorder(),
+                  contentPadding: EdgeInsets.all(10),
+                ),
+                onSaved: (value) {
+                  _menuDescription = value!;
+                },
               ),
-              onSaved: (value) {
-                _menuDescription = value!;
-              },
-            ),
-            const SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  _formKey.currentState!.save();
-                  widget.updateMenu(_menuTitle, _menuDescription);
-                  Navigator.pop(context);
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: kPrimaryColor,
-                padding: const EdgeInsets.all(16.0),
-              ),
-              child: const Text(
-                '保存',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: kTextColor,
+              const SizedBox(height: 16.0),
+              ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    _formKey.currentState!.save();
+                    widget.updateMenu(_menuTitle, _menuDescription);
+                    Navigator.pop(context);
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: kPrimaryColor,
+                  padding: const EdgeInsets.all(16.0),
+                ),
+                child: const Text(
+                  '保存',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: kTextColor,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
