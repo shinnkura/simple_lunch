@@ -42,7 +42,6 @@ class _EditMenuScreenState extends State<EditMenuScreen> {
               TextFormField(
                 decoration: InputDecoration(
                   labelText: '本日の献立',
-                  hintText: '本日のメニュー',
                   border: OutlineInputBorder(),
                   contentPadding: EdgeInsets.all(10),
                 ),
@@ -61,7 +60,6 @@ class _EditMenuScreenState extends State<EditMenuScreen> {
                 maxLines: 3,
                 decoration: const InputDecoration(
                   labelText: '説明',
-                  hintText: '説明を書いてください',
                   border: OutlineInputBorder(),
                   contentPadding: EdgeInsets.all(10),
                 ),
