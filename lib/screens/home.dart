@@ -202,8 +202,18 @@ class _HomePageState extends State<HomePage> {
                                               }
                                             }
                                           },
-                                          background:
-                                              Container(color: Colors.red),
+                                          background: Container(
+                                            color: Colors.red, // スワイプ時に表示される背景色
+                                            child: Align(
+                                              alignment: Alignment.centerRight,
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 20.0),
+                                                child: Icon(Icons.delete,
+                                                    color: Colors.white),
+                                              ),
+                                            ),
+                                          ),
                                           child: Padding(
                                             padding: const EdgeInsets.all(0),
                                             child: Column(
