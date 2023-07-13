@@ -1,11 +1,11 @@
 # Simple Lunch
 
 <div style="display: flex;">
-    <img src="images/Screenshot1.png" alt="ホーム画面" style="width: 30%;">
-    <img src="images/Screenshot2.png" alt="ホーム画面" style="width: 30%;">
-    <img src="images/Screenshot3.png" alt="ホーム画面" style="width: 30%;">
-    <img src="images/Screenshot4.png" alt="ホーム画面" style="width: 30%;">
-    <img src="images/Screenshot5.png" alt="ホーム画面" style="width: 30%;">
+    <img src="assets/images/Screenshot1.png" alt="ホーム画面" style="width: 30%;">
+    <img src="assets/images/Screenshot2.png" alt="ホーム画面" style="width: 30%;">
+    <img src="assets/images/Screenshot3.png" alt="ホーム画面" style="width: 30%;">
+    <img src="assets/images/Screenshot4.png" alt="ホーム画面" style="width: 30%;">
+    <img src="assets/images/Screenshot5.png" alt="ホーム画面" style="width: 30%;">
 </div>
 
 ## プロジェクトの概要
