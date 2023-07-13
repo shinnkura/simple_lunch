@@ -6,6 +6,7 @@
     <img src="assets/images/Screenshot3.png" alt="ホーム画面" style="width: 30%;">
     <img src="assets/images/Screenshot4.png" alt="ホーム画面" style="width: 30%;">
     <img src="assets/images/Screenshot5.png" alt="ホーム画面" style="width: 30%;">
+    <img src="assets/images/Screenshot6.png" alt="ホーム画面" style="width: 30%;">
 </div>
 
 ## プロジェクトの概要
