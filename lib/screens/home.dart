@@ -29,6 +29,34 @@ class _HomePageState extends State<HomePage> {
         menuDescription = menu['description'];
       });
     });
+    loadCheckboxStates().then((states) {
+      setState(() {
+        checkboxStates = states;
+      });
+    });
+  }
+
+  Future<Map<String, bool>> loadCheckboxStates() async {
+    // Firestoreからチェックボックスの状態を読み込む
+    CollectionReference checkboxStatesCollection =
+        FirebaseFirestore.instance.collection('checkboxStates');
+    QuerySnapshot querySnapshot = await checkboxStatesCollection.get();
+    Map<String, bool> states = {};
+    for (var doc in querySnapshot.docs) {
+      Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+      states[data['name']] = data['state'];
+    }
+    return states;
+  }
+
+  void updateCheckboxState(String name, bool state) {
+    // Firestoreにチェックボックスの状態を保存する
+    CollectionReference checkboxStatesCollection =
+        FirebaseFirestore.instance.collection('checkboxStates');
+    checkboxStatesCollection.doc(name).set({
+      'name': name,
+      'state': state,
+    });
   }
 
   Future<void> _refreshData() async {
