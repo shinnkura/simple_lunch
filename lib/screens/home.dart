@@ -172,12 +172,15 @@ class _HomePageState extends State<HomePage> {
                                       checkboxStates[time] = !isExpanded;
                                     });
                                   },
-                                  child: ListTile(
-                                    title: Text(
-                                      '$time     $totalOrdersAtThisTime名',
-                                      style: TextStyle(
-                                        color: kTextColor,
-                                        fontSize: 20,
+                                  child: Container(
+                                    // color: Colors.orange[50],
+                                    child: ListTile(
+                                      title: Text(
+                                        '$time     $totalOrdersAtThisTime名',
+                                        style: TextStyle(
+                                          color: kTextColor,
+                                          fontSize: 20,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -240,55 +243,33 @@ class _HomePageState extends State<HomePage> {
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.center,
                                                   children: [
-                                                    InkWell(
-                                                      onTap: () {
-                                                        setState(() {
-                                                          checkboxStates[order[
-                                                                  'name']] =
-                                                              !checkboxStates[
-                                                                  order[
-                                                                      'name']]!;
-                                                        });
-                                                      },
-                                                      child: Checkbox(
-                                                        value: checkboxStates[
-                                                                order[
-                                                                    'name']] ??
-                                                            false,
-                                                        onChanged:
-                                                            (bool? value) {
-                                                          setState(() {
-                                                            checkboxStates[order[
-                                                                    'name']] =
-                                                                value!;
-                                                          });
-                                                        },
-                                                        activeColor:
-                                                            Colors.orange,
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      child: Text(
-                                                        '${order['name']}',
-                                                        style: TextStyle(
-                                                          fontSize: 16,
-                                                          color: checkboxStates[
-                                                                      order[
-                                                                          'name']] ??
-                                                                  false
-                                                              ? Colors.grey
-                                                              : kTextColor,
-                                                          decoration: checkboxStates[
-                                                                      order[
-                                                                          'name']] ??
-                                                                  false
-                                                              ? TextDecoration
-                                                                  .lineThrough
-                                                              : TextDecoration
-                                                                  .none,
-                                                        ),
-                                                      ),
-                                                    ),
+                                                    // InkWell(
+                                                    //   onTap: () {
+                                                    //     setState(() {
+                                                    //       checkboxStates[order[
+                                                    //               'name']] =
+                                                    //           !checkboxStates[
+                                                    //               order[
+                                                    //                   'name']]!;
+                                                    //     });
+                                                    //   },
+                                                    //   child: Checkbox(
+                                                    //     value: checkboxStates[
+                                                    //             order[
+                                                    //                 'name']] ??
+                                                    //         false,
+                                                    //     onChanged:
+                                                    //         (bool? value) {
+                                                    //       setState(() {
+                                                    //         checkboxStates[order[
+                                                    //                 'name']] =
+                                                    //             value!;
+                                                    //       });
+                                                    //     },
+                                                    //     activeColor:
+                                                    //         Colors.orange,
+                                                    //   ),
+                                                    // ),
                                                     IconButton(
                                                       icon: Icon(
                                                         Icons.edit,
@@ -343,10 +324,149 @@ class _HomePageState extends State<HomePage> {
                                                                 'updated' ||
                                                             result ==
                                                                 'cancelled') {
-                                                          setState(
-                                                              () {}); // This will trigger a rebuild of the HomePage, which will cause the FutureBuilder to re-fetch the orders.
+                                                          setState(() {});
                                                         }
                                                       },
+                                                    ),
+                                                    Expanded(
+                                                      child: Text(
+                                                        '${order['name']}',
+                                                        style: TextStyle(
+                                                          fontSize: 16,
+                                                          color: checkboxStates[
+                                                                      order[
+                                                                          'name']] ??
+                                                                  false
+                                                              ? Colors.grey
+                                                              : kTextColor,
+                                                          decoration: checkboxStates[
+                                                                      order[
+                                                                          'name']] ??
+                                                                  false
+                                                              ? TextDecoration
+                                                                  .lineThrough
+                                                              : TextDecoration
+                                                                  .none,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    ElevatedButton(
+                                                      onPressed: () {
+                                                        showDialog(
+                                                          context: context,
+                                                          builder: (BuildContext
+                                                              context) {
+                                                            return AlertDialog(
+                                                              title: Text(
+                                                                  '${order['name']}さん'),
+                                                              content: Text(
+                                                                  '注文を受け取りましたか？'),
+                                                              actions: <Widget>[
+                                                                TextButton(
+                                                                  child: Text(
+                                                                      'キャンセル'),
+                                                                  onPressed:
+                                                                      () {
+                                                                    Navigator.of(
+                                                                            context)
+                                                                        .pop();
+                                                                  },
+                                                                ),
+                                                                TextButton(
+                                                                  child: Text(
+                                                                      '受け取りました'),
+                                                                  onPressed:
+                                                                      () async {
+                                                                    CollectionReference
+                                                                        orders =
+                                                                        FirebaseFirestore
+                                                                            .instance
+                                                                            .collection('orders');
+                                                                    QuerySnapshot
+                                                                        querySnapshot =
+                                                                        await orders
+                                                                            .get();
+                                                                    for (var doc
+                                                                        in querySnapshot
+                                                                            .docs) {
+                                                                      Map<String,
+                                                                              dynamic>
+                                                                          data =
+                                                                          doc.data() as Map<
+                                                                              String,
+                                                                              dynamic>;
+                                                                      if (data['name'] ==
+                                                                              order[
+                                                                                  'name'] &&
+                                                                          data['time'] ==
+                                                                              time) {
+                                                                        doc.reference
+                                                                            .delete();
+                                                                        break;
+                                                                      }
+                                                                    }
+                                                                    setState(
+                                                                        () {});
+                                                                    Navigator.of(
+                                                                            context)
+                                                                        .pop();
+                                                                  },
+                                                                ),
+                                                              ],
+                                                            );
+                                                          },
+                                                        );
+                                                      },
+                                                      style: ButtonStyle(
+                                                        backgroundColor:
+                                                            MaterialStateProperty
+                                                                .all<Color>(
+                                                          Color.fromARGB(
+                                                              255, 92, 91, 91),
+                                                        ),
+                                                        padding:
+                                                            MaterialStateProperty
+                                                                .all<
+                                                                    EdgeInsets>(
+                                                          const EdgeInsets
+                                                              .symmetric(
+                                                            horizontal: 10.0,
+                                                            vertical: 5.0,
+                                                          ),
+                                                        ),
+                                                        shape: MaterialStateProperty
+                                                            .all<
+                                                                RoundedRectangleBorder>(
+                                                          RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        15.0),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Icon(
+                                                            Icons
+                                                                .check_circle_outline,
+                                                            color: Colors.white,
+                                                            size: 18.0,
+                                                          ),
+                                                          SizedBox(width: 5),
+                                                          Text(
+                                                            '受け取りました',
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 12.0,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
